@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { AuthContext, useAuthContext } from "./context/AuthProvider";
 
@@ -33,5 +33,5 @@ export const useAppInit = () => {
     handleSession();
   }, [setAuthInfo, getUserInfo]);
 
-  return [loading, setAuthInfo ] as const;
+  return [loading] as const;
 };

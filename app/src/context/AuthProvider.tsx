@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 interface AuthContextValues {
   authInfo: AuthInfo;
   isAuthenticated: boolean;
   setAuthInfo: (authInfo: AuthInfo) => void;
-  isAdmin : boolean;
+  isAdmin: boolean;
 }
 
 export const AuthContext = React.createContext<undefined | AuthContextValues>(
@@ -24,27 +24,20 @@ interface AuthInfo {
 }
 
 export function AuthProvider({ children }: Props) {
-  // const [stringValue, setStringValue] = React.useState("stringValue");
-  // const anotherValue: boolean = stringValue;
-
   const [authInfo, setAuthInfo] = React.useState<AuthInfo>({
     userData: null,
   });
 
-  const isAuthenticated = authInfo.userData != null;
+  const isAuthenticated = authInfo.userData !== null;
 
   const isAdmin = authInfo.userData?.role === "ADMIN";
-
-  function handleAuthInfo(authInfo: AuthInfo) {
-    setAuthInfo(authInfo);
-  }
 
   return (
     <Provider
       value={{
         authInfo,
         isAuthenticated,
-        setAuthInfo: handleAuthInfo,
+        setAuthInfo,
         isAdmin,
       }}
     >
@@ -56,11 +49,9 @@ export function AuthProvider({ children }: Props) {
 export function useAuthContext() {
   const context = React.useContext(AuthContext);
 
-  if(context === undefined) {
+  if (context === undefined) {
     // handle
-
-    throw new Error("useAuthContext should be used with an AuthProvider.");
+    throw new Error("useAuthContext should be used within an AuthProvider.");
   }
-
   return context;
 }
