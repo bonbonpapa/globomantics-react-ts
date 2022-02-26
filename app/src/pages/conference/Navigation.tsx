@@ -24,6 +24,8 @@ function NavigationLink(props: { to: string; label: string }) {
 export function Navigation() {
   const { url } = useRouteMatch();
 
+
+
   return (
     <section className="banner">
       <img src="images/banner3.png" alt="" />
@@ -38,9 +40,9 @@ export function Navigation() {
               justifyContent: "center",
             }}
           >
-            <NavigationLink to={`${url}/speakers`} label="View Speakers" />
-            <NavigationLink to={`${url}/sessions`} label="View sessions" />
-            <NavigationLink to={`${url}/about`} label="About us" />
+            <NavigationLink to={`${url}/speakers`} label="View speakers"/>
+            <NavigationLink to={`${url}/sessions`} label="View sessions"/>
+            <NavigationLink to={`${url}/about`} label="About us"/>                 
           </div>
         </div>
       </div>
